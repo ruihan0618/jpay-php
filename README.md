@@ -1,11 +1,5 @@
 # JPay PHP bindings
 
-[![Build Status](https://travis-ci.org/JPay/JPay-php.svg?branch=master)](https://travis-ci.org/JPay/JPay-php)
-[![Latest Stable Version](https://poser.pugx.org/JPay/JPay-php/v/stable.svg)](https://packagist.org/packages/JPay/JPay-php)
-[![Total Downloads](https://poser.pugx.org/JPay/JPay-php/downloads.svg)](https://packagist.org/packages/JPay/JPay-php)
-[![License](https://poser.pugx.org/JPay/JPay-php/license.svg)](https://packagist.org/packages/JPay/JPay-php)
-[![Code Coverage](https://coveralls.io/repos/JPay/JPay-php/badge.svg?branch=master)](https://coveralls.io/r/JPay/JPay-php?branch=master)
-
 You can sign up for a JPay account at https://jpay.weidun.biz.
 
 ## Requirements
