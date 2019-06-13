@@ -1,0 +1,26 @@
+{
+    "name": "chuangxiang/jpay-php",
+    "description": "chuangxiang jpay php Library",
+    "authors": [
+        {
+            "name": "allen",
+            "email": "allen@weidun.biz"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-bcmath": "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": { "JPay\\" : "lib/" }
+    },
+    "extra": {
+        "branch-alias": {
+        }
+    }
+}
