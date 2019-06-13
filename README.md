@@ -17,7 +17,7 @@ PHP 5.6.0 and later.
 You can install the bindings via [Composer](http://getcomposer.org/). Run the following command:
 
 ```bash
-composer require chuangxiangjpay/jpay-php
+composer require jpaypp/jpay-php
 ```
 
 To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
@@ -49,7 +49,7 @@ If you use Composer, these dependencies should be handled automatically. If you 
 Simple usage looks like:
 
 ```php
-\JPay\JPay::setApiKey('sk_test_BQokikJOvBiI2HlWgH4olfQ2');
+\JPay\JPay::setApiKey('BQokikJOvBiI2HlWgH4olfQ2');
 $charge = \JPay\Charge::create([
         'product' =>[ 
            'name'      => '测试商品',   //商品名称
