@@ -1,8 +1,8 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
-use Pingpp\SubClient;
+use MasJPay\SubClient;
 
 /**
  * 子商户应用支付渠道

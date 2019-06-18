@@ -1,8 +1,8 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
-use JPay\Error\Authentication;
+use MasJPay\Error\Authentication;
 
 class ApiRequestor
 {
@@ -20,9 +20,9 @@ class ApiRequestor
     public function __construct($apiKey = null, $apiBase = null, $signOpts = null)
     {
         $this->_apiKey = $apiKey;
-        $this->_clientId = JPay::$clientId;
+        $this->_clientId = MasJPay::$clientId;
         if (!$apiBase) {
-            $apiBase = JPay::$apiBase;
+            $apiBase = MasJPay::$apiBase;
         }
 
         $this->_apiBase = $apiBase;
@@ -169,26 +169,26 @@ class ApiRequestor
     {
         $myApiKey = $this->_apiKey;
         if (!$myApiKey) {
-            $myApiKey = JPay::$apiKey;
+            $myApiKey = MasJPay::$apiKey;
         }
 
         if (!$myApiKey) {
             $msg = 'No API key provided.  (HINT: set your API key using '
-                . '"JPay::setApiKey(<API-KEY>)".  You can generate API keys from '
-                . 'the JPay web interface.  See JPay api doc for '
+                . '"MasJPay::setApiKey(<API-KEY>)".  You can generate API keys from '
+                . 'the MasJPay web interface.  See MasJPay api doc for '
                 . 'details.';
             throw new Error\Authentication($msg);
         }
 
         $myClientId = $this->_clientId;
         if (!$myClientId) {
-            $myClientId = JPay::$clientId;
+            $myClientId = MasJPay::$clientId;
         }
 
         if (!$myClientId) {
             $msg = 'No API clientId provided.  (HINT: set your clientId using '
-                . '"JPay::setClientId(<CLIENT-ID>)".  You can generate clientId from '
-                . 'the JPay web interface.  See JPay api doc for '
+                . '"MasJPay::setClientId(<CLIENT-ID>)".  You can generate clientId from '
+                . 'the MasJPay web interface.  See MasJPay api doc for '
                 . 'details.';
             throw new Error\Authentication($msg);
         }
@@ -202,19 +202,19 @@ class ApiRequestor
         $langVersion = phpversion();
         $uname = php_uname();
         $ua = [
-            'bindings_version' => JPay::VERSION,
+            'bindings_version' => MasJPay::VERSION,
             'lang' => 'php',
             'lang_version' => $langVersion,
-            'publisher' => 'JPay',
+            'publisher' => 'MasJPay',
             'uname' => $uname,
         ];
         $defaultHeaders = [
-            'X-JPay-Client-User-Agent' => json_encode($ua),
-            'User-Agent' => 'JPay/v1 /' . JPay::VERSION,
+            'X-MasJPay-Client-User-Agent' => json_encode($ua),
+            'User-Agent' => 'MasJPay/v1 /' . MasJPay::VERSION,
             'Authorization' => 'CODE ' . base64_encode($myApiKey),
         ];
-        if (JPay::$apiVersion) {
-            $defaultHeaders['JPay-Version'] = JPay::$apiVersion;
+        if (MasJPay::$apiVersion) {
+            $defaultHeaders['MasJPay-Version'] = MasJPay::$apiVersion;
         }
         if ($method == 'post' || $method == 'put') {
             $defaultHeaders['Content-type'] = 'application/json;charset=UTF-8';
@@ -223,11 +223,11 @@ class ApiRequestor
             $defaultHeaders['X-HTTP-Method-Override'] = 'PUT';
         }
         $requestHeaders = Util\Util::getRequestHeaders();
-        if (isset($requestHeaders['JPay-Sdk-Version'])) {
-            $defaultHeaders['JPay-Sdk-Version'] = $requestHeaders['JPay-Sdk-Version'];
+        if (isset($requestHeaders['MasJPay-Sdk-Version'])) {
+            $defaultHeaders['MasJPay-Sdk-Version'] = $requestHeaders['MasJPay-Sdk-Version'];
         }
-        if (isset($requestHeaders['JPay-One-Version'])) {
-            $defaultHeaders['JPay-One-Version'] = $requestHeaders['JPay-One-Version'];
+        if (isset($requestHeaders['MasJPay-One-Version'])) {
+            $defaultHeaders['MasJPay-One-Version'] = $requestHeaders['MasJPay-One-Version'];
         }
 
         $combinedHeaders = array_merge($defaultHeaders, $headers);
@@ -307,13 +307,13 @@ class ApiRequestor
         if ($this->privateKey()) {
             if ($requestTime !== null) {
                 $dataToBeSign .= $requestTime;
-                $headers[] = 'JPay-Request-Timestamp: ' . $requestTime;
+                $headers[] = 'MasJPay-Request-Timestamp: ' . $requestTime;
             }
             $signResult = openssl_sign($dataToBeSign, $requestSignature, $this->privateKey(), 'sha256');
             if (!$signResult) {
                 throw new Error\Api("Generate signature failed");
             }
-            $headers[] = 'JPay-Signature: ' . base64_encode($requestSignature);
+            $headers[] = 'MasJPay-Signature: ' . base64_encode($requestSignature);
         }
 
         $absUrl = Util\Util::utf8($absUrl);
@@ -322,7 +322,7 @@ class ApiRequestor
         $opts[CURLOPT_CONNECTTIMEOUT] = 30;
         $opts[CURLOPT_TIMEOUT] = 80;
         $opts[CURLOPT_HTTPHEADER] = $headers;
-        if (!JPay::$verifySslCerts) {
+        if (!MasJPay::$verifySslCerts) {
             $opts[CURLOPT_SSL_VERIFYPEER] = false;
         }
 
@@ -339,7 +339,7 @@ class ApiRequestor
             $errno == CURLE_SSL_CACERT_BADFILE) {
                 array_push(
                     $headers,
-                    'X-JPay-Client-Info: {"ca":"using JPay-supplied CA bundle"}'
+                    'X-MasJPay-Client-Info: {"ca":"using MasJPay-supplied CA bundle"}'
                 );
                 $cert = $this->caBundle();
                 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -366,14 +366,14 @@ class ApiRequestor
      */
     public function handleCurlError($errno, $message)
     {
-        $apiBase = JPay::$apiBase;
+        $apiBase = MasJPay::$apiBase;
         switch ($errno) {
             case CURLE_COULDNT_CONNECT:
             case CURLE_COULDNT_RESOLVE_HOST:
             case CURLE_OPERATION_TIMEOUTED:
                 $msg = "Could not connect to Ping++ ($apiBase).  Please check your "
                 . "internet connection and try again.  If this problem persists, "
-                . "you should check JPay's service status at "
+                . "you should check MasJPay's service status at "
                 . "https://pingxx.com/status.";
                 break;
             case CURLE_SSL_CACERT:
@@ -392,23 +392,23 @@ class ApiRequestor
 
     private function caBundle()
     {
-        if (JPay::$caBundle) {
-            return JPay::$caBundle;
+        if (MasJPay::$caBundle) {
+            return MasJPay::$caBundle;
         }
         return dirname(__FILE__) . '/../data/ca-certificates.crt';
     }
 
     private function privateKey()
     {
-        if (!JPay::$privateKey) {
-            if (!JPay::$privateKeyPath) {
+        if (!MasJPay::$privateKey) {
+            if (!MasJPay::$privateKeyPath) {
                 return null;
             }
-            if (!file_exists(JPay::$privateKeyPath)) {
-                throw new Error\Api('Private key file not found at: ' . JPay::$privateKeyPath);
+            if (!file_exists(MasJPay::$privateKeyPath)) {
+                throw new Error\Api('Private key file not found at: ' . MasJPay::$privateKeyPath);
             }
-            JPay::$privateKey = file_get_contents(JPay::$privateKeyPath);
+            MasJPay::$privateKey = file_get_contents(MasJPay::$privateKeyPath);
         }
-        return JPay::$privateKey;
+        return MasJPay::$privateKey;
     }
 }

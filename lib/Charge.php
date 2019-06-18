@@ -1,14 +1,15 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 class Charge extends ApiResource
 {
     /**
-     * @param array $params The ID of the charge to retrieve.
-     * @param array|string|null $options
-     *
-     * @return Charge
+     * @param null $params
+     * @param null $options
+     * @return mixed
+     * @throws Error\Api
+     * @throws Error\InvalidRequest
      */
     public static function retrieve($params = null, $options = null)
     {

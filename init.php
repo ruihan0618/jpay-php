@@ -11,7 +11,7 @@ if (!function_exists('mb_detect_encoding')) {
 }
 
 // Pingpp singleton
-require(dirname(__FILE__) . '/lib/JPay.php');
+require(dirname(__FILE__) . '/lib/MasJPay.php');
 
 // Utilities
 require(dirname(__FILE__) . '/lib/Util/Util.php');
@@ -29,7 +29,7 @@ require(dirname(__FILE__) . '/lib/Error/Channel.php');
 
 // Plumbing
 require(dirname(__FILE__) . '/lib/JsonSerializable.php');
-require(dirname(__FILE__) . '/lib/JPayObject.php');
+require(dirname(__FILE__) . '/lib/MasJPayObject.php');
 require(dirname(__FILE__) . '/lib/ApiRequestor.php');
 require(dirname(__FILE__) . '/lib/ApiResource.php');
 require(dirname(__FILE__) . '/lib/AttachedObject.php');

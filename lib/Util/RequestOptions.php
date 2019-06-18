@@ -1,8 +1,8 @@
 <?php
 
-namespace JPay\Util;
+namespace MasJPay\Util;
 
-use JPay\Error;
+use MasJPay\Error;
 
 class RequestOptions
 {

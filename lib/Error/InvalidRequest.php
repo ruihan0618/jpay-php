@@ -1,6 +1,6 @@
 <?php
 
-namespace JPay\Error;
+namespace MasJPay\Error;
 
 class InvalidRequest extends Base
 {

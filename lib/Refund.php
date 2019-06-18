@@ -1,6 +1,6 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 class Refund extends ApiResource
 {
@@ -21,7 +21,7 @@ class Refund extends ApiResource
         $id = Util\Util::utf8($id);
         $charge = Util\Util::utf8($charge);
 
-        $base = Charge::classUrl();
+        $base = Refund::classUrl();
         $chargeExtn = urlencode($charge);
         $extn = urlencode($id);
         return "$base/$chargeExtn/refunds/$extn";
@@ -29,12 +29,12 @@ class Refund extends ApiResource
 
     public static function classUrlWithChargeId($charge_id)
     {
-        return Charge::instanceUrlWithId($charge_id) . '/refunds';
+        return Refund::instanceUrlWithId($charge_id) . '/refunds';
     }
 
     public static function instanceUrlWithRefundId($charge_id, $refund_id)
     {
-        $base_url = Charge::instanceUrlWithId($charge_id) . '/refunds';
+        $base_url = Refund::instanceUrlWithId($charge_id) . '/refunds';
         return $base_url . '/' . $refund_id;
     }
 

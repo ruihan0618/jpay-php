@@ -1,14 +1,15 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 class Withdrawal extends AppBase
 {
     /**
-     * @param string $id The ID of the withdrawal to retrieve.
-     * @param array|string|null $options
-     *
-     * @return Withdrawal
+     * @param $id
+     * @param null $options
+     * @return mixed
+     * @throws Error\Api
+     * @throws Error\InvalidRequest
      */
     public static function retrieve($id, $options = null)
     {

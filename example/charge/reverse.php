@@ -3,7 +3,7 @@ require dirname(__FILE__) . '/../../init.php';
 // 示例配置文件，测试请根据文件注释修改其配置
 require dirname(__FILE__) . '/../config.php';
 
-$charge_id = 'ch_bTyjfTnzHCaHOyjbzP4mHmX1';
+$charge_id = 'ch_a3dd204ad575b4682d9093b3';
 try {
     $charge = \JPay\Charge::reverse($charge_id);
     echo $charge;

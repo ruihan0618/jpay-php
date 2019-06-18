@@ -1,8 +1,8 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
-class JPay
+class MasJPay
 {
     /**
      * @var string The JPay API key to be used for requests.
@@ -15,7 +15,7 @@ class JPay
     /**
      * @var string The base URL for the JPay API.
      */
-    public static $apiBase = 'https://api.jpay.weidun.biz';
+    public static $apiBase = 'https://api.jpay.live.weidun.biz';
     /**
      * @var string|null The version of the JPay API to use for requests.
      */

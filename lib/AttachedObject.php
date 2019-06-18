@@ -1,9 +1,9 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 // e.g. metadata on JPay objects.
-class AttachedObject extends JPayObject
+class AttachedObject extends MasJPayObject
 {
     /**
      * Updates this object.

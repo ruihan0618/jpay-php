@@ -1,6 +1,6 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 // JsonSerializable only exists in PHP 5.4+. Stub if out if it doesn't exist
 if (interface_exists('\JsonSerializable', false)) {

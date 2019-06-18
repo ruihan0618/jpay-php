@@ -1,6 +1,6 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 /**
  * Class SubApp 子商户对象
@@ -17,7 +17,7 @@ class SubClient extends AppBase
      * 创建子商户对象
      * @param $params
      * @param $options
-     * @return array|JPayObject
+     * @return array|MasJPayObject
      */
     public static function create($params, $options = null)
     {

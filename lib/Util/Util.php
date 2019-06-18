@@ -1,8 +1,8 @@
 <?php
 
-namespace JPay\Util;
+namespace MasJPay\Util;
 
-use JPay\JPayObject;
+use MasJPay\MasJPayObject;
 use stdClass;
 
 abstract class Util
@@ -43,7 +43,7 @@ abstract class Util
             if ($k[0] == '_') {
                 continue;
             }
-            if ($v instanceof JPayObject) {
+            if ($v instanceof MasJPayObject) {
                 $results[$k] = $keep_object ? $v->__toStdObject(true) : $v->__toArray(true);
             } elseif (is_array($v)) {
                 $results[$k] = self::convertJPayObjectToArray($v, $keep_object);
@@ -68,7 +68,7 @@ abstract class Util
             if ($k[0] == '_') {
                 continue;
             }
-            if ($v instanceof JPayObject) {
+            if ($v instanceof MasJPayObject) {
                 $results->$k = $v->__toStdObject(true);
             } elseif (is_array($v)) {
                 $results->$k = self::convertJPayObjectToArray($v, true);
@@ -89,38 +89,13 @@ abstract class Util
     public static function convertToJPayObject($resp, $opts)
     {
         $types = [
-            'agreement' => \JPay\Agreement::class,
-            'balance_bonus' => \JPay\BalanceBonus::class,
-            'balance_settlement' => \JPay\BalanceSettlements::class,
-            'balance_transaction' => \JPay\BalanceTransaction::class,
-            'balance_transfer' => \JPay\BalanceTransfer::class,
-            'batch_refund' => \JPay\BatchRefund::class,
-            'batch_transfer' => \JPay\BatchTransfer::class,
-            'batch_withdrawal' => \JPay\BatchWithdrawal::class,
-            'channel' => \JPay\Channel::class,
-            'charge' => \JPay\Charge::class,
-            'coupon' => \JPay\Coupon::class,
-            'coupon_template' => \JPay\CouponTemplate::class,
-            'customs' => \JPay\Customs::class,
-            'event' => \JPay\Event::class,
-            'list' => \JPay\Collection::class,
-            'order' => \JPay\Order::class,
-            'profit_transaction' => \JPay\ProfitTransaction::class,
-            'recharge' => \JPay\Recharge::class,
-            'red_envelope' => \JPay\RedEnvelope::class,
-            'refund' => \JPay\Refund::class,
-            'royalty' => \JPay\Royalty::class,
-            'royalty_settlement' => \JPay\RoyaltySettlement::class,
-            'royalty_template' => \JPay\RoyaltyTemplate::class,
-            'royalty_transaction' => \JPay\RoyaltyTransaction::class,
-            'settle_account' => \JPay\SettleAccount::class,
-            'split_profit' => \JPay\SplitProfit::class,
-            'split_receiver' => \JPay\SplitReceiver::class,
-            'sub_app' => \JPay\SubApp::class,
-            'sub_bank' => \JPay\SubBank::class,
-            'transfer' => \JPay\Transfer::class,
-            'user' => \JPay\User::class,
-            'withdrawal' => \JPay\Withdrawal::class,
+            'channel' => \MasJPay\Channel::class,
+            'charge' => \MasJPay\Charge::class,
+            'order' => \MasJPay\Order::class,
+            'refund' => \MasJPay\Refund::class,
+            'transfer' => \MasJPay\Transfer::class,
+            'user' => \MasJPay\User::class,
+            'withdrawal' => \MasJPay\Withdrawal::class,
         ];
         if (self::isList($resp)) {
             $mapped = [];
@@ -134,7 +109,7 @@ abstract class Util
                 && isset($types[$resp->object])) {
                     $class = $types[$resp->object];
             } else {
-                $class = 'JPay\\JPayObject';
+                $class = 'MasJPay\\MasJPayObject';
             }
             return $class::constructFrom($resp, $opts);
         } else {

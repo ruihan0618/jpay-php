@@ -1,11 +1,11 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 use ArrayAccess;
 use InvalidArgumentException;
 
-class JPayObject implements ArrayAccess, JsonSerializable
+class MasJPayObject implements ArrayAccess, JsonSerializable
 {
     /**
      * @var array Attributes that should not be sent to the API because they're
@@ -251,4 +251,4 @@ class JPayObject implements ArrayAccess, JsonSerializable
     }
 }
 
-JPayObject::init();
+MasJPayObject::init();

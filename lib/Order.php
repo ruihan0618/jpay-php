@@ -1,6 +1,6 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 class Order extends ApiResource
 {

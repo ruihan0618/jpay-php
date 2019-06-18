@@ -5,7 +5,7 @@ require dirname(__FILE__) . '/../../init.php';
 require dirname(__FILE__) . '/../config.php';
 
 // 查询 charge 对象
-$charge_id = 'ch_4WjrXPPOm1K08yLqn1LmzbTO';
+$charge_id = 'ch_a3dd204ad575b4682d9093b3';
 try {
     $charge = \JPay\Charge::retrieve(['ch'=>$charge_id]);
     echo $charge;

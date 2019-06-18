@@ -1,6 +1,6 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 class AppBase extends ApiResource
 {
@@ -9,13 +9,13 @@ class AppBase extends ApiResource
      */
     public static function appBaseUrl()
     {
-        if (JPay::$appId === null) {
+        if (MasJPay::$appId === null) {
             throw new Error\InvalidRequest(
-                'Please set a global app ID by JPay::setAppId(<apiKey>)',
+                'Please set a global app ID by MasJPay::setAppId(<apiKey>)',
                 null
             );
         }
-        $appId = Util\Util::utf8(JPay::$clientId);
+        $appId = Util\Util::utf8(MasJPay::$clientId);
         return "/v1/apps/${appId}";
     }
 

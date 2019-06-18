@@ -1,6 +1,6 @@
 <?php
 
-namespace JPay\Util;
+namespace MasJPay\Util;
 
 use IteratorAggregate;
 use ArrayIterator;

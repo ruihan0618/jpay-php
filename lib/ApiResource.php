@@ -1,10 +1,10 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
-use JPay\Error\InvalidRequest;
+use MasJPay\Error\InvalidRequest;
 
-abstract class ApiResource extends JPayObject
+abstract class ApiResource extends MasJPayObject
 {
     private static $HEADERS_TO_PERSIST = ['JPay-Version' => true];
 
@@ -15,11 +15,12 @@ abstract class ApiResource extends JPayObject
 
     public static function baseUrl()
     {
-        return JPay::$apiBase;
+        return MasJPay::$apiBase;
     }
 
     /**
-     * @return ApiResource The refreshed resource.
+     * @return $this
+     * @throws InvalidRequest
      */
     public function refresh()
     {
@@ -86,7 +87,7 @@ abstract class ApiResource extends JPayObject
                 $md5str = $md5str . $key . "=" . $val . "&";
             }
         }
-        $sign = strtoupper(md5($md5str . "key=" . JPay::$apiKey));
+        $sign = strtoupper(md5($md5str . "key=" . MasJPay::$apiKey));
         return $sign;
     }
 
@@ -110,7 +111,7 @@ abstract class ApiResource extends JPayObject
             return $_params;
         }
 
-        $params['client_id'] = JPay::$clientId;
+        $params['client_id'] = MasJPay::$clientId;
 
         foreach ($params as $key=>$param){
             if(is_array($param)){

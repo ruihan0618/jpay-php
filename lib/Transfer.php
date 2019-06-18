@@ -1,14 +1,15 @@
 <?php
 
-namespace JPay;
+namespace MasJPay;
 
 class Transfer extends ApiResource
 {
-    /** 查询指定 transfer 对象
-     * @param string $id The ID of the transfer to retrieve.
-     * @param array|string|null $options
-     *
-     * @return Transfer
+    /**
+     * @param $id
+     * @param null $options
+     * @return mixed
+     * @throws Error\Api
+     * @throws Error\InvalidRequest
      */
     public static function retrieve($id, $options = null)
     {
