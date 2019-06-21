@@ -15,7 +15,7 @@ abstract class ApiResource extends MasJPayObject
 
     public static function baseUrl()
     {
-        return MasJPay::$apiBase;
+        return MasJPay::$apiLiveBase;
     }
 
     /**
@@ -218,6 +218,26 @@ abstract class ApiResource extends MasJPayObject
 
         self::_validateParams($params);
         $url = static::classUrl()."/retrieve/".$params['ch'];
+
+        list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
+        return Util\Util::convertToJPayObject($response, $opts);
+
+
+    }
+
+
+    /**
+     * @param $params
+     * @param null $options
+     * @return mixed
+     * @throws Error\Api
+     * @throws InvalidRequest
+     */
+    protected static function _paid($params, $options = null)
+    {
+
+        self::_validateParams($params);
+        $url = static::classUrl()."/paid/".$params['ch'];
 
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
         return Util\Util::convertToJPayObject($response, $opts);

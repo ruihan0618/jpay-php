@@ -8,20 +8,24 @@ require dirname(__FILE__) . '/../config.php';
 // 此处为 Content-Type 是 application/json 时获取 POST 参数的示例
 $input_data = json_decode(file_get_contents('php://input'), true);
 
-$channel = '901';  $orderNo = substr(md5(time()), 0, 12);
+$channel = '903';  $orderNo = substr(md5(time()), 0, 18);
 
 try {
     $ch = \MasJPay\Charge::create([
             'product' =>[
                 'name'      => '测试商品',   //商品名称
                 'desc'      => '测试商品',   //商品描述
-                'amount'    => '0.01',                 // 订单总金额, 人民币单位：分（如订单总金额为 1 元，此处请填 100）
-                'currency'  => strtoupper('cny'),  //支付币种
+                'amount'    => '0.01',                 // 订单总金额, 人民币单位：元
+                'currency'  => strtoupper('usd'),  //支付币种
                 'quantity'  => '1'
             ],
             'wechat'    =>[
-                'mode'      => 'mweb',  //微信渠道901 ，支付模式，jsapi 微信公众号、native 扫码支付、mweb H5 支付
+                'mode'      => 'link',  //微信渠道901 ，支付模式，jsapi 微信公众号、native 扫码支付、mweb H5 支付 ,link 返回支付链接跳转
                 'openid'    => '23232323',
+            ],
+            'alipay'    =>[
+                'mode'      => 'native',  //支付宝渠道903 ，支付模式, native 扫码支付、mweb H5 支付,link 返回支付链接跳转
+                'form'      =>  1  //仅mode=mweb 有效，为1，true 返回form表单，false|0 ，返回json
             ],
             'create'    => time(),
             'out_order_no' => $orderNo,

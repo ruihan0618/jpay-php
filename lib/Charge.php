@@ -5,14 +5,15 @@ namespace MasJPay;
 class Charge extends ApiResource
 {
     /**
-     * @param null $params
+     * @param null $id
      * @param null $options
      * @return mixed
      * @throws Error\Api
      * @throws Error\InvalidRequest
      */
-    public static function retrieve($params = null, $options = null)
+    public static function retrieve($id = null, $options = null)
     {
+        $params = ['ch'=>$id];
         return self::_retrieve($params, $options);
     }
 
@@ -39,6 +40,19 @@ class Charge extends ApiResource
     }
 
     /**
+     * @param null $id
+     * @param null $options
+     * @return mixed
+     * @throws Error\Api
+     * @throws Error\InvalidRequest
+     */
+    public static function paid($id = null, $options = null)
+    {
+        $params = ['ch'=>$id];
+        return self::_paid($params, $options);
+    }
+
+    /**
      * @param string $id The ID of the charge.
      * @param array|string|null $options
      *
@@ -46,8 +60,8 @@ class Charge extends ApiResource
      */
     public static function reverse($id, $options = null)
     {
-        $url = static::classUrl().'/'.$id.'/reverse';
-        $params = [];
+        $url = static::classUrl().'/reverse';
+        $params = ['ch'=>$id];
         return static::_directRequest('post', $url, $params, $options);
     }
 }

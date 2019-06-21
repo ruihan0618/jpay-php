@@ -9,13 +9,22 @@ class MasJPay
      */
     public static $apiKey;
     /**
-     * @var string The JPay app ID to be used for /charge/balances/...
+     * @var string The JPay app ID to be used for /charge/refund/...
      */
     public static $clientId = null;
     /**
+     * @var string The JPay  to be used for /charge/refund/...
+     */
+    public static $apiMode = null;
+    /**
      * @var string The base URL for the JPay API.
      */
-    public static $apiBase = 'https://api.jpay.live.weidun.biz';
+    public static $apiLiveBase = 'https://api.jpay.live.weidun.biz';
+    /**
+     * @var string The base URL for the JPay API.
+     */
+    public static $apiSandboxBase = 'https://api.jpay.sandbox.weidun.biz';
+
     /**
      * @var string|null The version of the JPay API to use for requests.
      */
@@ -25,7 +34,7 @@ class MasJPay
      */
     public static $verifySslCerts = true;
 
-    const VERSION = '2.1.0';
+    const VERSION = '1.0.0';
 
     /**
      * @var string The private key path to be used for signing requests.
@@ -76,6 +85,21 @@ class MasJPay
     public static function setClientId($clientId)
     {
         self::$clientId = $clientId;
+    }
+    /**
+     * @return string
+     */
+    public static function getApiMode()
+    {
+        return self::$apiMode;
+    }
+
+    /**
+     * @param string $apiMode
+     */
+    public static function setApiMode($apiMode)
+    {
+        self::$apiMode = $apiMode;
     }
 
     /**

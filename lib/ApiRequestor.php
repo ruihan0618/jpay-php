@@ -13,6 +13,8 @@ class ApiRequestor
 
     public $_clientId;
 
+    public $_apiMode;
+
     private $_apiBase;
 
     private $_signOpts;
@@ -21,12 +23,23 @@ class ApiRequestor
     {
         $this->_apiKey = $apiKey;
         $this->_clientId = MasJPay::$clientId;
-        if (!$apiBase) {
-            $apiBase = MasJPay::$apiBase;
-        }
-
-        $this->_apiBase = $apiBase;
         $this->_signOpts = $signOpts;
+        $this->apiBase(); //设置接口地址
+    }
+
+    public function apiBase(){
+        $this->_apiBase = MasJPay::$apiLiveBase;
+        switch (MasJPay::$apiMode){
+            case "live":
+                $this->_apiBase = MasJPay::$apiLiveBase;
+                break;
+            case "sandbox":
+                $this->_apiBase = MasJPay::$apiSandboxBase;
+                break;
+            default:
+                $this->_apiBase = MasJPay::$apiLiveBase;
+                break;
+        }
     }
 
     private static function _encodeObjects($d, $is_post = false)
@@ -251,7 +264,7 @@ class ApiRequestor
     {
         try {
             $resp = json_decode($rbody);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $msg = "Invalid response body from API: $rbody "
                 . "(HTTP response code was $rcode)";
             throw new Error\Api($msg, $rcode, $rbody);
@@ -265,6 +278,7 @@ class ApiRequestor
 
     private function _curlRequest($method, $absUrl, $headers, $params)
     {
+
         $curl = curl_init();
         $method = strtolower($method);
         $opts = [];
@@ -360,30 +374,30 @@ class ApiRequestor
     }
 
     /**
-     * @param number $errno
-     * @param string $message
-     * @throws ApiConnectionError
+     * @param $errno
+     * @param $message
+     * @throws Error\ApiConnection
      */
     public function handleCurlError($errno, $message)
     {
-        $apiBase = MasJPay::$apiBase;
+        $apiBase = $this->_apiBase;
         switch ($errno) {
             case CURLE_COULDNT_CONNECT:
             case CURLE_COULDNT_RESOLVE_HOST:
             case CURLE_OPERATION_TIMEOUTED:
-                $msg = "Could not connect to Ping++ ($apiBase).  Please check your "
+                $msg = "Could not connect toMasJPay ($apiBase).  Please check your "
                 . "internet connection and try again.  If this problem persists, "
-                . "you should check MasJPay's service status at "
-                . "https://pingxx.com/status.";
+                . "you should check MasJPay's service status ";
+
                 break;
             case CURLE_SSL_CACERT:
             case CURLE_SSL_PEER_CERTIFICATE:
-                $msg = "Could not verify Ping++'s SSL certificate.  Please make sure "
+                $msg = "Could not verifyMasJPay's SSL certificate.  Please make sure "
                 . "that your network is not intercepting certificates.  "
                 . "(Try going to $apiBase in your browser.)";
                 break;
             default:
-                $msg = "Unexpected error communicating with Ping++.";
+                $msg = "Unexpected error communicating with MasJPay.";
         }
 
         $msg .= "\n\n(Network error [errno $errno]: $message)";

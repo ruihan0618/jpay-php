@@ -5,11 +5,11 @@ require dirname(__FILE__) . '/../../init.php';
 require dirname(__FILE__) . '/../config.php';
 
 // 查询 charge 对象
-$charge_id = 'ch_a3dd204ad575b4682d9093b3';
+$charge_id = 'ch_ebfd7acb2697400760d606d3';
 try {
-    $charge = \JPay\Charge::retrieve(['ch'=>$charge_id]);
-    echo $charge;
-} catch (\JPay\Error\Base $e) {
+    $charge = \MasJPay\Charge::retrieve($charge_id);
+    echo $charge."\r\n";
+} catch (\MasJPay\Error\Base $e) {
     if ($e->getHttpStatus() != null) {
         header('Status: ' . $e->getHttpStatus());
         echo $e->getHttpBody();
