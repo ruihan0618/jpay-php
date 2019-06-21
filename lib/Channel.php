@@ -2,8 +2,6 @@
 
 namespace MasJPay;
 
-use MasJPay\SubClient;
-
 /**
  * 子商户应用支付渠道
  * Class Channel
@@ -11,11 +9,7 @@ use MasJPay\SubClient;
  */
 class Channel extends AppBase
 {
-    public static function classUrlWithSubAppId($sub_app_id)
-    {
-        return SubClient::instanceUrlWithId($sub_app_id) . '/channels';
-    }
-
+   
     public static function instanceUrlWithChannel($sub_app_id, $channel)
     {
         $channel = Util\Util::utf8($channel);
@@ -29,7 +23,7 @@ class Channel extends AppBase
      * @param $sub_app_id
      * @param $params
      * @param $options
-     * @return array|JPayObject
+     * @return array|MasJPayObject
      */
     public static function create($sub_app_id, $params, $options = null)
     {
@@ -42,7 +36,7 @@ class Channel extends AppBase
      * @param $sub_app_id
      * @param $channel
      * @param $options
-     * @return array|JPayObject
+     * @return array|MasJPayObject
      */
     public static function retrieve($sub_app_id, $channel, $options = null)
     {
@@ -56,7 +50,7 @@ class Channel extends AppBase
      * @param $channel
      * @param null $params
      * @param $options
-     * @return array|JPayObject
+     * @return array|MasJPayObject
      */
     public static function update($sub_app_id, $channel, $params = null, $options = null)
     {
@@ -70,7 +64,7 @@ class Channel extends AppBase
      * @param $channel
      * @param null $params
      * @param $options
-     * @return array|JPayObject
+     * @return array|MasJPayObject
      */
     public static function delete($sub_app_id, $channel, $params = null, $options = null)
     {

@@ -5,7 +5,8 @@ namespace MasJPay;
 class Refund extends ApiResource
 {
     /**
-     * @return string The API URL for this JPay refund.
+     * @return string
+     * @throws Error\InvalidRequest
      */
     public function instanceUrl()
     {
@@ -29,12 +30,12 @@ class Refund extends ApiResource
 
     public static function classUrlWithChargeId($charge_id)
     {
-        return Refund::instanceUrlWithId($charge_id) . '/refunds';
+        return Refund::instanceUrlWithId($charge_id);
     }
 
     public static function instanceUrlWithRefundId($charge_id, $refund_id)
     {
-        $base_url = Refund::instanceUrlWithId($charge_id) . '/refunds';
+        $base_url = Refund::instanceUrlWithId($charge_id);
         return $base_url . '/' . $refund_id;
     }
 
@@ -56,7 +57,9 @@ class Refund extends ApiResource
      */
     public static function create($charge_id, $params, $options = null)
     {
-        $url = self::classUrlWithChargeId($charge_id);
+        $url = static::classUrl()."/";
+
+        $params['ch'] = $charge_id;
         return static::_directRequest('post', $url, $params, $options);
     }
 

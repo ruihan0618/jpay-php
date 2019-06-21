@@ -5,11 +5,12 @@ namespace MasJPay;
 class AppBase extends ApiResource
 {
     /**
-     * @return string The API URL base for app based objects.
+     * @return string
+     * @throws Error\InvalidRequest
      */
     public static function appBaseUrl()
     {
-        if (MasJPay::$appId === null) {
+        if (MasJPay::$clientId === null) {
             throw new Error\InvalidRequest(
                 'Please set a global app ID by MasJPay::setAppId(<apiKey>)',
                 null
@@ -20,7 +21,8 @@ class AppBase extends ApiResource
     }
 
     /**
-     * @return string The API URL for app based objects.
+     * @return string
+     * @throws Error\InvalidRequest
      */
     public static function classUrl()
     {

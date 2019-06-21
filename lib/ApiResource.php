@@ -222,9 +222,7 @@ abstract class ApiResource extends MasJPayObject
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
         return Util\Util::convertToJPayObject($response, $opts);
 
-
     }
-
 
     /**
      * @param $params
