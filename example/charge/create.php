@@ -25,7 +25,7 @@ try {
             ],
             'alipay'    =>[
                 'mode'      => 'native',  //支付宝渠道903 ，支付模式, native 扫码支付、mweb H5 支付,link 返回支付链接跳转
-                'form'      =>  1  //仅mode=mweb 有效，为1，true 返回form表单，false|0 ，返回json
+                'form'      =>  1  ////支付宝渠道903 ，支付模式, native 扫码支付、mweb H5 支付,link 返回支付链接跳转
             ],
             'create'    => time(),
             'out_order_no' => $orderNo,

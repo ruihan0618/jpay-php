@@ -115,11 +115,9 @@ abstract class ApiResource extends MasJPayObject
 
         foreach ($params as $key=>$param){
             if(is_array($param)){
-                foreach ($param as $k=>$p){
-                    $_params[$k] = $p;
-                }
+                $_params[$key] = urlencode(json_encode($param));
             }else{
-                $_params[$key] = $param;
+                $_params[$key] = urlencode($param);
             }
         }
         return $_params;

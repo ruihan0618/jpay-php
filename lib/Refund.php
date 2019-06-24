@@ -40,20 +40,10 @@ class Refund extends ApiResource
     }
 
     /**
-     * @param array|string|null $opts
-     *
-     * @return Refund The saved refund.
-     */
-    public function save($opts = null)
-    {
-        return $this->_save($opts);
-    }
-
-    /**
      * @param $charge_id
      * @param $params
      * @param $options
-     * @return array|JPayObject
+     * @return array|MasJPayObject
      */
     public static function create($charge_id, $params, $options = null)
     {
@@ -65,14 +55,16 @@ class Refund extends ApiResource
 
     /**
      * @param $charge_id
-     * @param $charge_refund_id
      * @param $options
-     * @return array|JPayObject
+     * @return array|MasJPayObject
      */
-    public static function retrieve($charge_id, $charge_refund_id, $options = null)
+    public static function retrieve($charge_id, $options = null)
     {
-        $url = self::instanceUrlWithRefundId($charge_id, $charge_refund_id);
-        return static::_directRequest('get', $url, $options);
+        $url = static::classUrl()."/retrieve";
+
+        $params['ch'] = $charge_id;
+
+        return static::_directRequest('post', $url, $params, $options);
     }
 
     public static function all($charge_id, $params, $options = null)

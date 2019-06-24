@@ -33,6 +33,10 @@ class MasJPay
      * @var boolean Defaults to true.
      */
     public static $verifySslCerts = true;
+    /**
+     * @var boolean Defaults to true.
+     */
+    public static $debug = false;
 
     const VERSION = '1.0.0';
 
@@ -167,4 +171,22 @@ class MasJPay
     {
         self::$privateKey = $key;
     }
+
+    /**
+     * @return bool
+     */
+    public static function isDebug()
+    {
+        return self::$debug;
+    }
+
+    /**
+     * @param bool $debug
+     */
+    public static function setDebug($debug)
+    {
+        self::$debug = $debug;
+    }
+
+
 }

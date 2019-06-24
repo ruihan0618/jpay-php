@@ -212,6 +212,7 @@ class ApiRequestor
         $params = array_merge(['client_id'=>$myClientId], $params);
         $params = self::_encodeObjects($params, $method == 'post' || $method == 'put');
 
+
         $langVersion = phpversion();
         $uname = php_uname();
         $ua = [
@@ -369,6 +370,29 @@ class ApiRequestor
         }
 
         $rcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if(MasJPay::$debug){
+            echo "=====url======\r\n";
+            echo ($absUrl)."\r\n";
+
+            echo "=====post data======\r\n";
+            print_r($params)."\r\n";;
+
+            echo "=====headers======\r\n";
+            print_r($headers)."\r\n";;
+
+            echo '=====request info====='."\r\n";
+            print_r( curl_getinfo($curl) )."\r\n";;
+
+            echo '=====response code====='."\r\n";
+            echo( $rcode )."\r\n";;
+
+            echo '=====response====='."\r\n";
+            echo ( $rbody )."\r\n";;
+        }
+
+
+
         curl_close($curl);
         return [$rbody, $rcode];
     }
