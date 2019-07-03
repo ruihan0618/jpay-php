@@ -20,7 +20,7 @@ try {
             'name'=> '支付宝',  //支付宝
             'sub'=> '支付宝',  //支付宝
             'account' => '陈云波',  //支付宝账号
-            'cardnumber' => 'cyb929@163.com',  //支付宝账号
+            'card' => 'cyb929@163.com',  //支付宝账号
             'province'  => 'beijing',
             'city'  => 'beijing'
         ],
