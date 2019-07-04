@@ -43,25 +43,40 @@ If you use Composer, these dependencies should be handled automatically. If you 
 Simple usage looks like:
 
 ```php
-\JPay\JPay::setApiKey('BQokikJOvBiI2HlWgH4olfQ2');
-$charge = \JPay\Charge::create([
-        'product' =>[ 
-           'name'      => '测试商品',   //商品名称
-           'desc'      => '测试商品',   //商品描述
-           'amount'    => '12.0',                 // 订单总金额, 人民币单位：分（如订单总金额为 1 元，此处请填 100）
-           'currency'  => strtoupper('cny'),  //支付币种
-           'quantity'  => '1'
-       ],
-       'openid'    => '23232323',
-       'create'    => time(),
-       'out_order_no' => $orderNo,
-       'extra'     => '商品测试',                  //原样返回
-       'channel'   => $channel,                // 支付使用的第三方支付渠道取值
-       'client_ip' => '1.1.1.1', // 发起支付请求客户端的 IP 地址，格式为 IPV4，如: 127.0.0.1
-       'notify'=> 'http://www.imerl.com',   //异步通知地址
-       'callback'=>'http://www.imerl.com',  //同步地址
-   ]);
-echo $charge;
+\MasJPay\MasJPay::setDebug(true); //调试模式   true /false
+\MasJPay\MasJPay::setApiMode('sandbox'); //环境  live 线上，sandbox 沙盒
+\MasJPay\MasJPay::setClientId('10000000');   // 设置 CLIENT ID
+\MasJPay\MasJPay::setApiKey('BQokikJOvBiI2HlWgH4olfQ2');    // 设置 API Key
+try {
+    $ch = \MasJPay\Charge::create([
+        'channel'   => '901',                // 支付使用的第三方支付渠道取值
+        'out_order_no' => $orderNo,  //外部订单号 ，可为空，为空时由系统生成
+        'product' =>[  //商品信息
+            'name'      => '测试商品',   //商品名称
+            'desc'      => '测试商品',   //商品描述
+            'amount'    => '1',   // 订单总金额
+            'quantity'  => '1'  //商品数量
+        ],
+        'extra'    =>[     //扩展信息
+            'mode'      => 'mweb',  //微信渠道901 ，支付模式，jsapi 微信公众号、native 扫码支付、mweb H5 支付 ,link 返回支付链接跳转
+            'format'    => 'xml', //返回方式 from 表单直接提交/ json 返回， xml 返回
+        ],
+        'client_ip' => '1.1.1.1',   //客户端发起支付请求的IP
+        'notify'=> 'http://localhost/notify.html',   //异步通知地址
+        'callback'=>'http://localhost/callback.html',  //同步地址
+     ]);
+    echo $ch;                                       // 输出 返回的支付凭据 Charge
+} catch (\MasJPay\Error\Base $e) {
+    // 捕获报错信息
+    if ($e->getHttpStatus() != null) {
+        header('Status: ' . $e->getHttpStatus());
+        echo $e->getHttpBody();
+    } else {
+        echo $e->getMessage();
+    }
+}
+
+
 ```
 
 ## Documentation
