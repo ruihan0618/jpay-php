@@ -1,6 +1,6 @@
 # JPay PHP bindings
 
-You can sign up for a JPay account at https://jpay.weidun.biz.
+You can sign up for a MasJPay account at https://jpay.weidun.biz.
 
 ## Requirements
 
