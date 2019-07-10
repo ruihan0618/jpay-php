@@ -8,9 +8,7 @@ require dirname(__FILE__) . '/../config.php';
 // 此处为 Content-Type 是 application/json 时获取 POST 参数的示例
 $input_data = json_decode(file_get_contents('php://input'), true);
 
-$channel = '903';
-$orderNo = substr(md5(time()), 0, 18);
-
+$channel = '903'; $orderNo = substr(md5(time()), 0, 18);
 try {
     $refund = \MasJPay\Refund::create('ch_4cdcaed1cedb2a0650f2398d',
         [

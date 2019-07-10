@@ -8,7 +8,7 @@ require dirname(__FILE__) . '/../config.php';
 // 此处为 Content-Type 是 application/json 时获取 POST 参数的示例
 $input_data = json_decode(file_get_contents('php://input'), true);
 
-$channel = '901';  $orderNo = substr(md5(time()), 0, 18);
+$channel = '903';  $orderNo = substr(md5(time()), 0, 18);
 
 try {
     $ch = \MasJPay\Charge::create([
@@ -21,8 +21,8 @@ try {
             'quantity'  => '1'  //商品数量
         ],
         'extra'    =>[     //扩展信息
-            'mode'      => 'mweb',  //微信渠道901 ，支付模式，jsapi 微信公众号、native 扫码支付、mweb H5 支付 ,link 返回支付链接跳转
-            'format'    => 'json', //返回方式 from 表单直接提交/ json 返回， xml 返回
+            'mode'      => 'link',  //微信渠道901 ，支付模式，jsapi 微信公众号、native 扫码支付、mweb H5 支付 ,link 返回支付链接跳转
+            'format'    => 'json', //返回方式 from 表单直接提交/ json 返回
         ],
         'metadata'  => '自定义数据',
         'client_ip' => '1.1.1.1',   //客户端发起支付请求的IP

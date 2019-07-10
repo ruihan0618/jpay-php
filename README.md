@@ -50,20 +50,22 @@ Simple usage looks like:
 try {
     $ch = \MasJPay\Charge::create([
         'channel'   => '901',                // 支付使用的第三方支付渠道取值
-        'out_order_no' => $orderNo,  //外部订单号 ，可为空，为空时由系统生成
+        'out_order_no' => time(),  //外部订单号 ，为空时由系统生成
         'product' =>[  //商品信息
-            'name'      => '测试商品',   //商品名称
-            'desc'      => '测试商品',   //商品描述
+            'subject'      => '测试商品',   //商品名称
+            'body'      => '测试商品',   //商品描述
             'amount'    => '1',   // 订单总金额
             'quantity'  => '1'  //商品数量
         ],
         'extra'    =>[     //扩展信息
             'mode'      => 'mweb',  //微信渠道901 ，支付模式，jsapi 微信公众号、native 扫码支付、mweb H5 支付 ,link 返回支付链接跳转
-            'format'    => 'xml', //返回方式 from 表单直接提交/ json 返回， xml 返回
+            'format'    => 'json', //返回方式 from 表单直接提交/ json 返回
         ],
+        'metadata'  => '自定义数据',
         'client_ip' => '1.1.1.1',   //客户端发起支付请求的IP
+        'description' => '测试数据', //订单备注说明
         'notify'=> 'http://localhost/notify.html',   //异步通知地址
-        'callback'=>'http://localhost/callback.html',  //同步地址
+        'return'=>'http://localhost/callback.html',  //同步地址
      ]);
     echo $ch;                                       // 输出 返回的支付凭据 Charge
 } catch (\MasJPay\Error\Base $e) {
@@ -81,7 +83,7 @@ try {
 
 ## Documentation
 
-Please see https://jpay.weidun.biz/docs/api for up-to-date documentation.
+Please see https://jpay.weidun.biz/api for up-to-date documentation.
 
 ## Development
 
