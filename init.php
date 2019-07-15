@@ -10,7 +10,7 @@ if (!function_exists('mb_detect_encoding')) {
     throw new Exception('JPay needs the Multibyte String PHP extension.');
 }
 
-// Pingpp singleton
+// singleton
 require(dirname(__FILE__) . '/lib/MasJPay.php');
 
 // Utilities
@@ -33,9 +33,9 @@ require(dirname(__FILE__) . '/lib/ApiRequestor.php');
 require(dirname(__FILE__) . '/lib/ApiResource.php');
 require(dirname(__FILE__) . '/lib/AppBase.php');
 
-// Pingpp API Resources
+// API Resources
 require(dirname(__FILE__) . '/lib/Charge.php');
 require(dirname(__FILE__) . '/lib/Refund.php');
 require(dirname(__FILE__) . '/lib/Transfer.php');
-require(dirname(__FILE__) . '/lib/Withdrawal.php');
+require(dirname(__FILE__) . '/lib/WithDrawal.php');
 require(dirname(__FILE__) . '/lib/Channel.php');
