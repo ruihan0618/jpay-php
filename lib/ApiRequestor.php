@@ -356,7 +356,6 @@ class ApiRequestor
                     $headers,
                     'X-MasJPay-Client-Info: {"ca":"using MasJPay-supplied CA bundle"}'
                 );
-                $cert = $this->caBundle();
                 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
                 curl_setopt($curl, CURLOPT_CAINFO, $cert);
                 $rbody = curl_exec($curl);
@@ -426,14 +425,6 @@ class ApiRequestor
 
         $msg .= "\n\n(Network error [errno $errno]: $message)";
         throw new Error\ApiConnection($msg);
-    }
-
-    private function caBundle()
-    {
-        if (MasJPay::$caBundle) {
-            return MasJPay::$caBundle;
-        }
-        return dirname(__FILE__) . '/../data/ca-certificates.crt';
     }
 
     private function privateKey()
