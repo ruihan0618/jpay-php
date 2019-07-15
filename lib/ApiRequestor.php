@@ -357,7 +357,6 @@ class ApiRequestor
                     'X-MasJPay-Client-Info: {"ca":"using MasJPay-supplied CA bundle"}'
                 );
                 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($curl, CURLOPT_CAINFO, $cert);
                 $rbody = curl_exec($curl);
         }
 
