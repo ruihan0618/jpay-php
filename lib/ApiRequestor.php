@@ -337,29 +337,13 @@ class ApiRequestor
         $opts[CURLOPT_CONNECTTIMEOUT] = 30;
         $opts[CURLOPT_TIMEOUT] = 80;
         $opts[CURLOPT_HTTPHEADER] = $headers;
-        if (!MasJPay::$verifySslCerts) {
-            $opts[CURLOPT_SSL_VERIFYPEER] = false;
-        }
-
         curl_setopt_array($curl, $opts);
         $rbody = curl_exec($curl);
 
         if (!defined('CURLE_SSL_CACERT_BADFILE')) {
             define('CURLE_SSL_CACERT_BADFILE', 77);  // constant not defined in PHP
         }
-
-        $errno = curl_errno($curl);
-        if ($errno == CURLE_SSL_CACERT ||
-            $errno == CURLE_SSL_PEER_CERTIFICATE ||
-            $errno == CURLE_SSL_CACERT_BADFILE) {
-                array_push(
-                    $headers,
-                    'X-MasJPay-Client-Info: {"ca":"using MasJPay-supplied CA bundle"}'
-                );
-                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-                $rbody = curl_exec($curl);
-        }
-
+        
         if ($rbody === false) {
             $errno = curl_errno($curl);
             $message = curl_error($curl);

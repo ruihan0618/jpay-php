@@ -32,7 +32,7 @@ class MasJPay
     /**
      * @var boolean Defaults to true.
      */
-    public static $verifySslCerts = true;
+    public static $verifySslCerts = false;
     /**
      * @var boolean Defaults to true.
      */
