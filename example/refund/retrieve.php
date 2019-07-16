@@ -5,10 +5,10 @@ require dirname(__FILE__) . '/../../init.php';
 require dirname(__FILE__) . '/../config.php';
 
 // 查询 charge 对象
-$charge_id = 'ch_4cdcaed1cedb2a0650f2398d';
+$refund_id = 're_e39bf65e7759aa7082f805fe';
 try {
-    $charge = \MasJPay\Refund::retrieve($charge_id);
-    echo $charge."\r\n";
+    $refund = \MasJPay\Refund::retrieve($refund_id);
+    echo $refund."\r\n";
 } catch (\MasJPay\Error\Base $e) {
     if ($e->getHttpStatus() != null) {
         header('Status: ' . $e->getHttpStatus());

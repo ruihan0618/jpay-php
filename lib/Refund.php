@@ -54,15 +54,15 @@ class Refund extends ApiResource
     }
 
     /**
-     * @param $charge_id
+     * @param $refund_id
      * @param $options
      * @return array|MasJPayObject
      */
-    public static function retrieve($charge_id, $options = null)
+    public static function retrieve($refund_id, $options = null)
     {
         $url = static::classUrl()."/retrieve";
 
-        $params['ch'] = $charge_id;
+        $params['re'] = $refund_id;
 
         return static::_directRequest('post', $url, $params, $options);
     }

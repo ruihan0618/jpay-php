@@ -8,14 +8,12 @@ require dirname(__FILE__) . '/../config.php';
 // 此处为 Content-Type 是 application/json 时获取 POST 参数的示例
 $input_data = json_decode(file_get_contents('php://input'), true);
 
-$channel = '903'; $orderNo = substr(md5(time()), 0, 18);
+$orderNo = substr(md5(time()), 0, 18);
 try {
-    $refund = \MasJPay\Refund::create('ch_4cdcaed1cedb2a0650f2398d',
-        [
-        'total_fee' => '0.01',
-        'refund_fee' =>'0.01',
-        'refund_reason' => '东西不要了',
-    ]);
+    $refund = \MasJPay\Refund::create(
+        'ch_55c6728214a952e059a6af9a',
+        ['amount' => '0.01', 'description' =>'Refund Description']
+    );
     echo $refund;                                       // 输出 返回的支付凭据 Charge
 } catch (\MasJPay\Error\Base $e) {
     // 捕获报错信息
