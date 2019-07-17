@@ -11,7 +11,7 @@ $input_data = json_decode(file_get_contents('php://input'), true);
 $orderNo = substr(md5(time()), 0, 18);
 try {
     $refund = \MasJPay\Refund::create(
-        'ch_55c6728214a952e059a6af9a',
+        'ch_d487b7672801426fac2344d3',
         ['amount' => '0.01', 'description' =>'Refund Description']
     );
     echo $refund;                                       // 输出 返回的支付凭据 Charge

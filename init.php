@@ -25,6 +25,7 @@ require(dirname(__FILE__) . '/lib/Error/ApiConnection.php');
 require(dirname(__FILE__) . '/lib/Error/Authentication.php');
 require(dirname(__FILE__) . '/lib/Error/InvalidRequest.php');
 require(dirname(__FILE__) . '/lib/Error/RateLimit.php');
+require(dirname(__FILE__) . '/lib/Error/SignatureVerification.php');
 
 // Plumbing
 require(dirname(__FILE__) . '/lib/JsonSerializable.php');
@@ -39,3 +40,5 @@ require(dirname(__FILE__) . '/lib/Refund.php');
 require(dirname(__FILE__) . '/lib/Transfer.php');
 require(dirname(__FILE__) . '/lib/WithDrawal.php');
 require(dirname(__FILE__) . '/lib/Channel.php');
+require(dirname(__FILE__) . '/lib/Webhook.php');
+require(dirname(__FILE__) . '/lib/WebhookSignature.php');

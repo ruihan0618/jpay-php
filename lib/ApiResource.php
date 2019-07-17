@@ -74,7 +74,6 @@ abstract class ApiResource extends MasJPayObject
     /**
      * @param $list
      * @return string
-     * @throws InvalidRequest
      */
     public static function createSign($list){
 
