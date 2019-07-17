@@ -336,6 +336,7 @@ class ApiRequestor
         $opts[CURLOPT_RETURNTRANSFER] = true;
         $opts[CURLOPT_CONNECTTIMEOUT] = 30;
         $opts[CURLOPT_TIMEOUT] = 80;
+        $opts[CURLOPT_SSL_VERIFYPEER] = false;
         $opts[CURLOPT_HTTPHEADER] = $headers;
         curl_setopt_array($curl, $opts);
         $rbody = curl_exec($curl);
