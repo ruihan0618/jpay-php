@@ -8,7 +8,7 @@ require dirname(__FILE__) . '/../config.php';
 // 此处为 Content-Type 是 application/json 时获取 POST 参数的示例
 $input_data = json_decode(file_get_contents('php://input'), true);
 
-$channel = '903';  $orderNo = substr(md5(time()), 0, 18);
+$channel = '901';  $orderNo = substr(md5(time()), 0, 18);
 
 try {
     $ch = \MasJPay\Charge::create([
@@ -17,7 +17,7 @@ try {
         'product' =>[  //商品信息
             'subject'      => '测试商品',   //商品名称
             'body'      => '测试商品',   //商品描述
-            'amount'    => '0.01',   // 订单总金额
+            'amount'    => '0.5',   // 订单总金额
             'quantity'  => '1'  //商品数量
         ],
         'extra'    =>[     //扩展信息
@@ -27,8 +27,8 @@ try {
         'metadata'  => '自定义数据',
         'client_ip' => '',   //客户端发起支付请求的IP
         'description' => '测试数据', //订单备注说明
-        'notify'=> 'http://localhost/notify.html',   //异步通知地址
-        'return'=>'http://localhost/callback.html',  //同步地址
+        'notify'=> 'https://jpay.weidun.biz/sdk/example/webhook.php',   //异步通知地址
+        'return'=>'https://jpay.weidun.biz/sdk/example/return.php',  //同步地址
      ]);
     echo $ch."\r\n";                                       // 输出 返回的支付凭据 Charge
 } catch (\MasJPay\Error\Base $e) {

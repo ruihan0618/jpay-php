@@ -1,8 +1,8 @@
 <?php
 
 //获取方式：登录 [Dashboard](https://jpay.weidun.biz)->商户后台->右上角API开发-> APIKEY
-const CLIENT_ID = '10030';
-const APP_KEY = 'u6umnrba7fc4j47aujd3na8h27t5dxce';
+const CLIENT_ID = '10002';
+const APP_KEY = 'k1qn32lw9ppdfmxslch1b8rh9pvrcdfw';
 
 \MasJPay\MasJPay::setDebug(true); //调试模式   true /false
 \MasJPay\MasJPay::setApiMode('sandbox'); //环境  live 线上，sandbox 沙盒
