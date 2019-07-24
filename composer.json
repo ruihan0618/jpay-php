@@ -1,12 +1,19 @@
 {
     "name": "jpaypp/jpay-php",
     "description": "jpaypp php Library",
+    "keywords": [
+        "MasPay",
+        "payment processing",
+        "pay",
+        "api"
+    ],
     "authors": [
         {
-            "name": "allen",
-            "email": "allen@weidun.biz"
+            "name": "MasPay team",
+            "homepage": "https://jpay.weidun.biz"
         }
     ],
+    "homepage": "https://jpay.weidun.biz/",
     "require": {
         "php": ">=5.6.0",
         "ext-curl": "*",
@@ -17,10 +24,11 @@
     "require-dev": {
     },
     "autoload": {
-        "psr-4": { "JPay\\" : "lib/" }
+        "psr-4": { "MasJPay\\" : "lib/" }
     },
     "extra": {
         "branch-alias": {
+            "dev-master": "2.0-dev"
         }
     }
 }
